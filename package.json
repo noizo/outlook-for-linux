@@ -13,11 +13,11 @@
     "url": "git+ssh://github.com/JamieMagee/teams-for-linux"
   },
   "author": "Ivelin Velkov <ivelin.velkov@gmail.com>",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "GPLv3",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "start": "yarn install && yarn compile && electron ./dist",
-    "compile": "rimraf 'dist/**/*.js' && tsc",
+    "start": "yarn install && yarn compile && electron ./app",
+    "compile": "rimraf 'app/**/*.js' && tsc",
     "pack": "yarn compile && electron-builder --dir",
     "dist": "yarn compile && electron-builder",
     "release": "yarn compile && electron-builder"
@@ -44,7 +44,6 @@
       "packageCategory": "net",
       "executableName": "teams",
       "synopsis": "Microsoft Teams for Linux",
-      "description": "Unofficial Microsoft Teams client for Linux using Electron.",
       "desktop": {
         "Name": "Microsoft Teams for Linux",
         "Comment": "Unofficial client for Microsoft Teams for Linux",
