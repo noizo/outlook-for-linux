@@ -1,6 +1,7 @@
 {
   "name": "teams-for-linux",
   "version": "0.0.9",
+  "main": "./app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/JamieMagee/teams-for-linux",
   "keywords": [
@@ -20,19 +21,23 @@
     "dist": "electron-builder",
     "release": "electron-builder"
   },
+  "dependencies": {
+    "electron-window-state": "~4.1.1",
+    "opn": "5.3.0",
+    "yargs": "^12.0.1"
+  },
   "devDependencies": {
     "electron": "^3.0.0",
     "electron-builder": "^20.28.4"
   },
   "build": {
     "appId": "teams-for-linux",
-    "asar": false,
     "linux": {
       "category": "Network;Chat",
       "packageCategory": "net",
       "executableName": "teams",
       "synopsis": "Microsoft Teams for Linux",
-      "description": "Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App\n and wraps it as a standalone application using Electron.",
+      "description": "Unofficial Microsoft Teams client for Linux using Electron.",
       "desktop": {
         "Name": "Microsoft Teams for Linux",
         "Comment": "Unofficial client for Microsoft Teams for Linux",
@@ -49,6 +54,5 @@
         "releaseType": "draft"
       }
     }
-  },
-  "dependencies": {}
+  }
 }
