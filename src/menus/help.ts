@@ -1,8 +1,7 @@
-'use strict';
+import open from 'opn';
+import { App } from 'electron';
 
-const open = require('opn');
-
-exports = module.exports = app => {
+export function help(app: App): Electron.MenuItemConstructorOptions {
   return {
     label: 'Help',
     submenu: [
@@ -22,4 +21,4 @@ exports = module.exports = app => {
       { role: 'toggledevtools' }
     ]
   };
-};
+}

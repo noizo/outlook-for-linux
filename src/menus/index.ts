@@ -1,18 +1,14 @@
-'use strict';
-
-const {
-  app,
-  nativeImage,
-  ipcMain,
-  Tray,
-  Menu
-} = require('electron');
-const preferences = require('./preferences');
-const help = require('./help');
+import { app, nativeImage, ipcMain, Tray, Menu } from 'electron';
+import { preferences } from './preferences';
+import { help } from './help';
 
 let shouldQuit = false;
 
-class Menus {
+export class Menus {
+  iconPath: any;
+  config: any;
+  tray!: Tray;
+  image!: Electron.NativeImage;
 
   constructor(config, iconPath) {
     this.iconPath = iconPath;
@@ -34,38 +30,38 @@ class Menus {
   }
 
   register(window) {
-    const appMenu = new Menu.buildFromTemplate(
-      [
-        {
-          label: 'Open',
-          accelerator: 'ctrl+O',
-          click: () => Menus.open(window)
-        },
-        {
-          label: 'Refresh',
-          accelerator: 'ctrl+R',
-          click: () => Menus.reload(window)
-        },
-        {
-          label: 'Quit',
-          accelerator: 'ctrl+Q',
-          click: () => Menus.quit()
-        }
-      ]
-    );
+    const appMenu = Menu.buildFromTemplate([
+      {
+        label: 'Open',
+        accelerator: 'ctrl+O',
+        click: () => Menus.open(window)
+      },
+      {
+        label: 'Refresh',
+        accelerator: 'ctrl+R',
+        click: () => Menus.reload(window)
+      },
+      {
+        label: 'Quit',
+        accelerator: 'ctrl+Q',
+        click: () => Menus.quit()
+      }
+    ]);
 
-    window.setMenu(new Menu.buildFromTemplate([
-      {
-        // workaround for alt+shift showing the hidden menu and blocking input
-        label: ''
-      },
-      {
-        label: 'File',
-        submenu: appMenu
-      },
-      preferences(this.config, window),
-      help(app)
-    ]));
+    window.setMenu(
+      Menu.buildFromTemplate([
+        {
+          // workaround for alt+shift showing the hidden menu and blocking input
+          label: ''
+        },
+        {
+          label: 'File',
+          submenu: appMenu
+        },
+        preferences(this.config, window),
+        help(app)
+      ])
+    );
 
     this.tray = new Tray(this.iconPath);
     this.tray.setToolTip('Microsoft Teams');
@@ -79,7 +75,7 @@ class Menus {
     });
     this.tray.setContextMenu(appMenu);
 
-    window.on('close', (event) => {
+    window.on('close', event => {
       if (!shouldQuit) {
         event.preventDefault();
         window.hide();
@@ -93,11 +89,9 @@ class Menus {
         this.image = nativeImage.createFromDataURL(icon);
         this.tray.setImage(this.image);
         window.flashFrame(count > 0);
-      } catch (err) {
-        console.error(`Could not update tray icon: ${err.message}`, err);
+      } catch (e) {
+        console.error(`Could not update tray icon: ${e.message}`, e);
       }
     });
   }
 }
-
-exports = module.exports = Menus;

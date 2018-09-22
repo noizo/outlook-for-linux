@@ -1,9 +1,7 @@
-'use strict';
+import yargs from 'yargs';
+import path from 'path';
 
-const yargs = require('yargs');
-const path = require('path');
-
-function argv(configPath) {
+export function configBuilder(configPath: string): yargs.Arguments {
   return yargs
     .env(true)
     .config(path.join(configPath, 'teams.json'))
@@ -55,5 +53,3 @@ function argv(configPath) {
     })
     .implies('firewallUsername', 'firewallPassword').argv;
 }
-
-exports = module.exports = argv;

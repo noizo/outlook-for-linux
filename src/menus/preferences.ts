@@ -1,6 +1,7 @@
-'use strict';
-
-exports = module.exports = (config, window) => {
+export function preferences(
+  config,
+  window
+): Electron.MenuItemConstructorOptions {
   return {
     label: 'Preferences',
     submenu: [

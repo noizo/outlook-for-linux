@@ -16,10 +16,11 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "start": "yarn install && electron ./app",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "release": "electron-builder"
+    "start": "yarn install && yarn compile && electron ./dist",
+    "compile": "rimraf 'dist/**/*.js' && tsc",
+    "pack": "yarn compile && electron-builder --dir",
+    "dist": "yarn compile && electron-builder",
+    "release": "yarn compile && electron-builder"
   },
   "dependencies": {
     "electron-window-state": "~4.1.1",
@@ -27,8 +28,14 @@
     "yargs": "^12.0.1"
   },
   "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/electron-window-state": "^2.0.31",
+    "@types/opn": "^5.1.0",
+    "@types/yargs": "^12.0.0",
     "electron": "^3.0.0",
-    "electron-builder": "^20.28.4"
+    "electron-builder": "^20.28.4",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.0.3"
   },
   "build": {
     "appId": "teams-for-linux",

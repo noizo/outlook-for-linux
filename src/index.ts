@@ -1,15 +1,14 @@
-'use strict';
-
-const windowStateKeeper = require('electron-window-state');
-const path = require('path');
-const open = require('opn');
-const { app, ipcMain, BrowserWindow } = require('electron');
-const configBuilder = require('./config');
+import { app, ipcMain, BrowserWindow } from 'electron';
+import { configBuilder } from './config';
+import open from 'opn';
+import path from 'path';
+import windowStateKeeper from 'electron-window-state';
+import yargs from 'yargs';
 
 const DEFAULT_WINDOW_WIDTH = 800;
 const DEFAULT_WINDOW_HEIGHT = 800;
 
-const Menus = require('./menus');
+import { Menus } from './menus';
 
 let menus;
 
@@ -28,8 +27,8 @@ function createWindow(iconPath) {
     width: windowState.width,
     height: windowState.height,
 
-    iconPath,
     autoHideMenuBar: true,
+    frame: false,
 
     webPreferences: {
       partition: 'persist:teams',
@@ -43,10 +42,12 @@ function createWindow(iconPath) {
   return window;
 }
 
+let config: yargs.Arguments;
+
 app.on('ready', () => {
   const iconPath = path.join(__dirname, './assets/icons/icon-96x96.png');
   const window = createWindow(iconPath);
-  const config = configBuilder(app.getPath('userData'));
+  config = configBuilder(app.getPath('userData'));
 
   menus = new Menus(config, iconPath);
   menus.register(window);
@@ -62,11 +63,11 @@ app.on('ready', () => {
 
   window.webContents.on('new-window', (event, url) => {
     event.preventDefault();
-    open(url, err => {
-      if (err) {
-        console.error(`exec error: ${err.message}`);
-      }
-    });
+    try {
+      open(url);
+    } catch (e) {
+      console.error(`exec error: ${e.message}`);
+    }
   });
 
   if (config.userAgent === 'edge') {
@@ -78,7 +79,7 @@ app.on('ready', () => {
   window.loadURL(config.url);
 
   if (config.webDebug) {
-    window.openDevTools();
+    window.webContents.openDevTools();
   }
 });
 

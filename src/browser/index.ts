@@ -1,6 +1,4 @@
-'use strict';
-
-(function () {
+(function() {
   const path = require('path');
   const { ipcRenderer } = require('electron');
   const trayNotifications = require('./tray-notifications');
@@ -18,5 +16,6 @@
     nativeNotifications({
       ipc: ipcRenderer,
       iconPath
-    }));
+    })
+  );
 })();
