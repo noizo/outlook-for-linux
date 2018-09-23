@@ -28,7 +28,6 @@ function createWindow(iconPath) {
     height: windowState.height,
 
     autoHideMenuBar: true,
-    frame: false,
 
     webPreferences: {
       partition: 'persist:teams',
