@@ -11,7 +11,7 @@ export function help(app: App): Electron.MenuItemConstructorOptions {
       },
       {
         label: 'Github Project',
-        click: () => open('https://github.com/ivelkov/teams-for-linux')
+        click: () => open('https://github.com/JamieMagee/teams-for-linux')
       },
       { type: 'separator' },
       {
