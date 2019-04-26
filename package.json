@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "outlook-for-linux",
   "version": "0.1.17",
+=======
+  "name": "teams-for-linux",
+  "version": "0.2.0",
+>>>>>>> 2c1c19546a8954db54630ac40c6f8bc797893e7c
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft outlook for Linux",
   "homepage": "https://github.com/noizo/outlook-for-linux",
@@ -43,9 +48,15 @@
     "linux": {
       "category": "Network;Chat",
       "packageCategory": "net",
+<<<<<<< HEAD
       "executableName": "outlook",
       "synopsis": "Microsoft outlook for Linux",
       "description": "Unofficial Microsoft outlook client for Linux using Electron. It uses the Web App\n and wraps it as a standalone application using Electron.",
+=======
+      "executableName": "teams-for-linux",
+      "synopsis": "Microsoft Teams for Linux",
+      "description": "Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App\n and wraps it as a standalone application using Electron.",
+>>>>>>> 2c1c19546a8954db54630ac40c6f8bc797893e7c
       "desktop": {
         "Name": "Microsoft outlook for Linux",
         "Comment": "Unofficial client for Microsoft outlook for Linux",
@@ -59,14 +70,20 @@
         "AppImage",
         "pacman"
       ],
-      "mimeTypes": ["application/sip"],
+      "mimeTypes": [
+        "application/sip"
+      ],
       "publish": {
         "provider": "github",
         "releaseType": "draft"
       }
     },
     "snap": {
+<<<<<<< HEAD
       "synopsis": "Unofficial Microsoft outlook client for Linux using Electron. It uses the Web App\n and wraps it as a standalone application using Electron.",
+=======
+      "synopsis": "Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App and wraps it as a standalone application using Electron.",
+>>>>>>> 2c1c19546a8954db54630ac40c6f8bc797893e7c
       "confinement": "strict",
       "grade": "devel",
       "buildPackages": [],
